@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ instance.title }}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ instance.title }}</h1>
+<p>{{ instance.content }}</p>
+<p>{{ instance.dateadded }}</p>
+<p>{{ instance.dateupdated }}</p>
+
+{% endblock %}

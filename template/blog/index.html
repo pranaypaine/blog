@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>blog</title>
+</head>
+<body>
+<h1>{{ title }} is working</h1>
+{% for post_data in data %}
+{{ post_data.title }}<br>
+{{ post_data.content }}<br>
+{{ post_data.dateadded }}<br>
+{{ post_data.dateupdated }}<br>
+<br>
+{% endfor %}
+</body>
+</html>

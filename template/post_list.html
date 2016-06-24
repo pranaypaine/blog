@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+{% if not post_data %}
+
+{% for post_data in data %}
+<!-- static files not working check them why.. -->
+<div class="col s12 m4">
+<div class="card wide hoverable z-depth-3">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="/static/images/3.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">{{ post_data.title|title }}<i class="material-icons right">more_vert</i></span>
+      <p>{{ post_data.dateadded|timesince }} ago</p>
+    </div>
+    <div class="card-action">
+    <a href="{{ post_data.get_absolute_url }}">view</a>
+    <a href='{% url "delete" id=post_data.id %}'>delete </a>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">{{ post_data.title|title }}<i class="material-icons right">close</i></span>
+      <p>{{ post_data.content|capfirst }}</p>
+    </div>
+  </div>
+
+</div>
+
+<!--<h1><a href="{{ post_data.get_absolute_url }}">{{ post_data.title }}</a></h1>
+<p><a href='{% url "edit" id=post_data.id %} '>edit</a></p><p><a href='{% url "delete" id=post_data.id %}'>Delete</a></p>
+<p>Added on - {{ post_data.dateadded }}</p>-->
+{% endfor %}
+
+<!--<div class="pagination">
+    <span class="step-links">
+        {% if post_data.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ post_data.number }} of {{ post_data.paginator.num_pages }}.
+        </span>
+
+        {% if post_data.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>-->
+
+{% else %}
+<h1>No data found</h1>
+{% endif %}
+</div>
+
+
+{% endblock content %}
