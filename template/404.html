@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ instance.title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col s12">
+<div class="card wide hoverable z-depth-5">
+    <div class="card-content center">
+      <span class="card-title grey-text text-darken-4">Page not found</span>
+      <p>Page you requested may be removed or doesnot exists</p>
+      <p>Go back to <a href='{% url "list" %}'>Home</a> </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

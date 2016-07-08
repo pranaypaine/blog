@@ -4,13 +4,13 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-from .forms import PostForm
+from .forms import PostForm, UserForm
 # Create your views here.
 from .models import Post
 
 def post_create(request):
 	#create a post
-	form = PostForm(request.POST or None)
+	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
@@ -33,8 +33,8 @@ def post_detail(request, id=None):
 
 def post_list(request):
 	#list all the posts in the app
-	post_data = Post.objects.all().order_by("-dateadded")
-	paginator = Paginator(post_data, 10) # Show 25 contacts per page
+	post_data = Post.objects.all().order_by("-dateupdated")
+	paginator = Paginator(post_data, 12) # Show 25 contacts per page
 	page_req_var = 'page'
 	page = request.GET.get(page_req_var)
 	try:
@@ -59,7 +59,7 @@ render function takes the request and returns it to a template with the data in 
 def post_update(request, id=None):
 	#edit post request
 	instance = get_object_or_404(Post, id=id)
-	form = PostForm(request.POST or None, instance=instance)
+	form = PostForm(request.POST or None, request.FILES or None, instance=instance)
 	if form.is_valid():
 		instance = form.save(commit=False)
 		instance.save()
@@ -73,7 +73,7 @@ def post_update(request, id=None):
 		"instance" : instance,
 		"form": form,
 	}
-	return render(request, "form.html", context)
+	return render(request, "edit_post.html", context)
 
 
 def post_delete(request, id=None):
@@ -81,3 +81,12 @@ def post_delete(request, id=None):
 	instance.delete()
 	#delete post
 	return redirect("list")
+
+def login(request):
+	logform = UserForm(request.POST or None)
+
+	context = {
+		"form": logform,
+	}
+	return render(request, "login.html", context)
+	pass

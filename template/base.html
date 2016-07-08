@@ -20,15 +20,15 @@
   <li><a href="#!">logout</a></li>
 </ul>
 <!-- navbar starts -->
-<nav class="blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href='{% url "list" %}' class="brand-logo">Blog</a>
+<nav class="red darken-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href='{% url "list" %}' class="brand-logo">G+</a>
       <ul class="right hide-on-med-and-down">
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Pranay Paine<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav ">
         <li><a href="#">Pranay Paine</a></li>
         <li class="divider"></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href='{% url "login" %}'>Profile</a></li>
         <li class="divider"></li>
         <li><a href="#">Settings</a></li>
         <li class="divider"></li>
@@ -43,13 +43,9 @@
 <div class="container">
 	{% block content %}
 		
-	{% endblock content %}
+	
 
-	<div class="fixed-action-btn " style="bottom: 45px; right: 24px;">
-    <a href='{% url "add" %}' class="btn-floating btn-large red  z-depth-5 btn tooltipped" data-position="left" data-delay="50" data-tooltip="Add a post">
-      <i class="large material-icons">add</i>
-    </a>
-  </div>
+  {% endblock content %}
 
 </div>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -60,7 +56,9 @@
   $(document).ready(function(){
     $('.tooltipped').tooltip({delay: 50}, 'rounded');
   });
-       
+  $(document).ready(function(){
+     $('.parallax').parallax();
+    });
 </script>
 </body>
 </html>

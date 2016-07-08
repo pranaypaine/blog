@@ -9,15 +9,17 @@ from  .views import(
 	post_create,
 	post_update,
 	post_delete,
-	post_detail
+	post_detail,
+	login
 )
 
 urlpatterns = [
     url(r'^$', post_list, name="list"),
     url(r'^create/$', post_create, name="add"),
-    url(r'^(?P<id>\d+)/edit/$', post_update, name="edit"),
+    url(r'^edit/(?P<id>\d+)/$', post_update, name="edit"),
     url(r'^(?P<id>\d+)/$', post_detail, name="detail"),
     url(r'^(?P<id>\d+)/delete/$', post_delete, name="delete"),
+    url(r'^login/$', login, name="login"),
 
 ]
 # go through vid 19 again for url better routing

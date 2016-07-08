@@ -6,9 +6,22 @@
 
 {% block content %}
 
-<h1>{{ instance.title }}</h1>
-<p>{{ instance.content }}</p>
-<p>{{ instance.dateadded }}</p>
-<p>{{ instance.dateupdated }}</p>
+<div class="col s12">
+<div class="card wide hoverable z-depth-5">
+    <div class="card-image">
+      {% if instance.image %}
+      <img class="activator" src="{{ instance.image.url }}">
+      {% else %}
+      <img class="activator" src="/static/images/3.jpg">
+      {% endif %}
+    </div>
+    <div class="card-content">
+      <span class="card-title grey-text text-darken-4">{{ instance.title|title }}</span>
+      <p>{{ instance.dateupdated|timesince }} ago</p>
+      <p>Added by: <a href="/pranay">Pranay</a> (to be changed)</p>
+      <p>{{ instance.content|capfirst }}</p>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

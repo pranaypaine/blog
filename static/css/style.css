@@ -16,8 +16,27 @@
 {
     background-color: #6D6B6B;
 }
+h1
+{
+	color: #757575;
+}
+h2
+{
+	color: #757575;
+}
+h3
+{
+	color: #757575;
+}
+h4
+{
+	color: #757575;
+}
 a
 {
-	font-style: #ffffff;
-	color: blue;
+	color: green;
+}
+.parallax-container
+{
+    height: 450px;
 }

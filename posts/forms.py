@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Post
+from .models import Post, User_login
 
 
 class PostForm(forms.ModelForm):
@@ -9,5 +9,16 @@ class PostForm(forms.ModelForm):
 		model = Post
 		fields = [
 			"title",
-			"content"
+			"image",
+			"content",
 		]
+
+class UserForm(forms.ModelForm):
+	"""docstring for UserForm"""
+	class Meta:
+		model = User_login
+		fields = [
+			"username",
+			"password"
+		]
+		

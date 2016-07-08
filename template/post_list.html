@@ -3,56 +3,64 @@
 {% block content %}
 
 <div class="row">
-{% if not post_data %}
+{% if data %}
 
 {% for post_data in data %}
 <!-- static files not working check them why.. -->
 <div class="col s12 m4">
 <div class="card wide hoverable z-depth-3">
     <div class="card-image waves-effect waves-block waves-light">
+      {% if post_data.image %}
+      <img class="activator" src="{{ post_data.image.url }}">
+      {% else %}
       <img class="activator" src="/static/images/3.jpg">
+      {% endif %}
     </div>
     <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">{{ post_data.title|title }}<i class="material-icons right">more_vert</i></span>
-      <p>{{ post_data.dateadded|timesince }} ago</p>
+      <span class="card-title grey-text text-darken-4">{{ post_data.title|title }}<i class="material-icons right">more_vert</i></span>
+      <p>{{ post_data.dateupdated|timesince }} ago</p>
     </div>
-    <div class="card-action">
-    <a href="{{ post_data.get_absolute_url }}">view</a>
-    <a href='{% url "delete" id=post_data.id %}'>delete </a>
+    <div class="card-action center">
+    <a href="{{ post_data.get_absolute_url }}">View</a>
+    <a href='{% url "edit" id=post_data.id %}'>Edit</a>
+    <a href='{% url "delete" id=post_data.id %}'>Delete </a>
     </div>
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">{{ post_data.title|title }}<i class="material-icons right">close</i></span>
-      <p>{{ post_data.content|capfirst }}</p>
+      <p>{{ post_data.content|capfirst|truncatechars:200 }}</p>
     </div>
   </div>
-
 </div>
 
-<!--<h1><a href="{{ post_data.get_absolute_url }}">{{ post_data.title }}</a></h1>
-<p><a href='{% url "edit" id=post_data.id %} '>edit</a></p><p><a href='{% url "delete" id=post_data.id %}'>Delete</a></p>
-<p>Added on - {{ post_data.dateadded }}</p>-->
 {% endfor %}
 
-<!--<div class="pagination">
-    <span class="step-links">
-        {% if post_data.has_previous %}
-            <a href="?page={{ contacts.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ post_data.number }} of {{ post_data.paginator.num_pages }}.
-        </span>
-
-        {% if post_data.has_next %}
-            <a href="?page={{ contacts.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>-->
-
-{% else %}
-<h1>No data found</h1>
-{% endif %}
+<div class="row center">
+<div class="col s12">
+<ul class="pagination">
+    {% if data.has_previous %}
+    <li class="waves-effect"><a href="?page={{ data.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+    <li class="waves-effect">Page {{ data.number }} of {{ data.paginator.num_pages }}</li>
+    {% if data.has_next %}
+    <li class="waves-effect"><a href="?page={{ data.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>  
+</div>
 </div>
 
+{% else %}
+<div class="center z-depth-1">
+<h4>No posts found add one to fill this space.</h4>
+</div>
+{% endif %}
+</div>
+<!-- implement a better paginator -->
+
+
+<div class="fixed-action-btn " style="bottom: 45px; right: 24px;">
+    <a href='{% url "add" %}' class="btn-floating btn-large red darken-1 z-depth-5 btn tooltipped" data-position="left" data-delay="50" data-tooltip="Add a post">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
 
 {% endblock content %}
